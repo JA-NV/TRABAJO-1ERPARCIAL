@@ -1,0 +1,158 @@
+import java.util.Scanner;
+
+public class CalculadoraMatematica {
+
+    // atributos privados tipo double
+   private double num1;
+   private double num2;
+   
+   /**
+     * Constructor por defecto de la clase,
+     * Inicializando los atributos con valor cero.
+     */
+
+    public CalculadoraMatematica() {
+        this.num1 = 0;
+        this.num2 = 0;
+    }
+    
+//Metodo para establecer los valores de los numeros
+    public void setNums(double num1,double num2) {
+        this.num1 = num1;
+        this.num2 = num2;
+    }
+
+   
+//obtiene el primer numero
+    public double getNum1() {
+        return num1;
+    }
+//obtieno el segundo numero
+    public double getNum2() {
+        return num2;
+    }
+      
+    //metodo de suma
+    public double suma(){
+    return(num1 + num2);
+    }
+   
+    //metodo de resta
+    public double resta(){
+    return(num1 - num2);
+    }
+    
+    //metodo de multiplicacion
+    public double multiplicacion(){
+    return (num1 * num2);
+    }
+    
+    /*metodo de division. Maneja la division entre 0 con el condicional if
+    Tambien se usa una excepcion para imprimir el mensaje de error
+    */
+    public double division()throws ArithmeticException {
+    if (num2 == 0){
+        throw new ArithmeticException("Error: No se puede dividir entre 0");
+    }
+    return(num1 / num2);
+    }
+
+    public static void main(String[] args){
+    Scanner scanner = new Scanner(System.in);
+    CalculadoraMatematica calc = new CalculadoraMatematica();
+    
+int opcion;
+boolean Numing = false;
+    
+    do {
+    System.out.println("\n===== CALCULADORA MATEMATICA =====");
+    System.out.println("1. Ingresar numeros");
+    System.out.println("2. Sumar");
+    System.out.println("3. Restar");
+    System.out.println("4. Multiplicar");
+    System.out.println("5. Dividir");
+    System.out.println("0. Salir");
+    System.out.println("==================================");
+    System.out.print("Seleccione una opcion: ");
+    
+    opcion = scanner.nextInt();
+    
+    //Switch para el menu interactivo
+    switch (opcion) {
+        case 1:
+            System.out.print("Primer Numero:");
+            double num1 = scanner.nextDouble();
+            System.out.print("Segundo Numero");
+            double num2 = scanner.nextDouble();
+            
+           calc.setNums(num1,num2);
+           Numing= true;
+           System.out.println("Numeros ingresados con exito");
+           break;
+        
+        case 2:
+            if (Numing) {
+            System.out.println("==================================");
+            System.out.println("Suma:" + calc.suma());
+            }
+            else {
+            System.out.println("==================================");
+            System.out.println("Primero ingrese los numeros");
+            }
+            break;
+        
+        case 3:
+            if (Numing) {
+                System.out.println("==================================");
+            System.out.println("resta:" + calc.resta());
+            }
+            else {
+                System.out.println("==================================");
+            System.out.println("Primero ingrese los numeros");
+            }
+            break;
+            
+        case 4:
+            if (Numing) {
+                System.out.println("==================================");
+            System.out.println("Multiplicacion:" + calc.multiplicacion());
+            }
+            else {
+                System.out.println("==================================");
+            System.out.println("Primero ingrese los numeros");
+            }
+            break;
+            
+            //uso del try para manejar la division entre 0
+        case 5:
+            if (Numing) {
+           try {
+               System.out.println("==================================");
+               System.out.println("Division:" + calc.division());
+           }
+           catch(ArithmeticException e){
+           System.out.println(e.getMessage());
+           }
+            }else { 
+                System.out.println("==================================");
+            System.out.println("Primero ingrese los numeros");
+            }
+            break;
+            
+        case 0:
+            System.out.println("==================================");
+           System.out.println("Hasta luego!!");
+           break;
+           
+        default:
+            System.out.println("==================================");
+            System.out.println("Opcion invalida, vuelva a intentar.");
+           break;
+      
+    }
+    
+} while (opcion != 0);
+    
+     scanner.close();
+    }
+}
