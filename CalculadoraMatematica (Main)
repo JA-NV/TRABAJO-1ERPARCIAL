@@ -1,0 +1,103 @@
+import java.util.Scanner;
+
+public class Main{
+  public static void main(String[] args){
+    Scanner scanner = new Scanner(System.in);
+    CalculadoraMatematica calc = new CalculadoraMatematica();
+    
+int opcion;
+boolean Numing = false;
+    
+    do {
+    System.out.println("\n===== CALCULADORA MATEMATICA =====");
+    System.out.println("1. Ingresar numeros");
+    System.out.println("====================================");
+    System.out.println("2. Sumar");
+    System.out.println("3. Restar");
+    System.out.println("4. Multiplicar");
+    System.out.println("5. Dividir");
+    System.out.println("0. Salir");
+    System.out.println("==================================");
+    System.out.print("\nSeleccione una opcion: ");
+    
+    opcion = scanner.nextInt();
+    
+    //Switch para el menu interactivo
+    switch (opcion) {
+        case 1:
+            System.out.print("Primer Numero: ");
+            double num1 = scanner.nextDouble();
+            System.out.print("Segundo Numero: ");
+            double num2 = scanner.nextDouble();
+            
+           calc.setNums(num1,num2);
+           Numing= true;
+           System.out.println("\nNumeros ingresados con exito");
+           break;
+        
+        case 2:
+            if (Numing) {
+            System.out.println("==================================");
+            System.out.println("\nLa suma es igual a " + calc.suma());
+            }
+            else {
+            System.out.println("==================================");
+            System.out.println("\nError: Primero ingrese los numeros");
+            }
+            break;
+        
+        case 3:
+            if (Numing) {
+                System.out.println("==================================");
+            System.out.println("\nLa resta es igual a " + calc.resta());
+            }
+            else {
+                System.out.println("==================================");
+            System.out.println("\nError: Primero ingrese los numeros");
+            }
+            break;
+            
+        case 4:
+            if (Numing) {
+                System.out.println("==================================");
+            System.out.println("\nLa multiplicacion es igual a " + calc.multiplicacion());
+            }
+            else {
+                System.out.println("==================================");
+            System.out.println("\nError: Primero ingrese los numeros");
+            }
+            break;
+            
+            //uso del try para manejar la division entre 0
+        case 5:
+            if (Numing) {
+           try {
+               System.out.println("==================================");
+               System.out.println("\nla division es igual a " + calc.division());
+           }
+           catch(ArithmeticException e){
+           System.out.println(e.getMessage());
+           }
+            }else { 
+                System.out.println("==================================");
+            System.out.println("\nPrimero ingrese los numeros");
+            }
+            break;
+            
+        case 0:
+            System.out.println("==================================");
+           System.out.println("\nHasta luego!!");
+           break;
+           
+        default:
+            System.out.println("==================================");
+            System.out.println("\nOpcion invalida; inserte una opcion valida.");
+           break;
+      
+    }
+    
+} while (opcion != 0);
+    
+     scanner.close();
+    }
+}
